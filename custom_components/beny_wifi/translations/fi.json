@@ -1,0 +1,248 @@
+{
+    "title": "Beny Wifi",
+    "entity": {
+      "sensor": {
+        "charger_state": {
+          "name": "Latausaseman tila",
+          "state": {
+            "abnormal": "vika",
+            "unplugged": "ei kytketty",
+            "standby": "valmiustila",
+            "starting": "aloittaa",
+            "unknown": "tuntematon",
+            "waiting": "odottaa",
+            "charging": "lataa"
+          }
+        },
+        "power": {
+          "name": "Teho"
+        },
+        "voltage1": {
+          "name": "Jännite L1"
+        },
+        "voltage2": {
+          "name": "Jännite L2"
+        },
+        "voltage3": {
+          "name": "Jännite L3"
+        },
+        "current1": {
+          "name": "Virta L1"
+        },
+        "current2": {
+          "name": "Virta L2"
+        },
+        "current3": {
+          "name": "Virta L3"
+        },
+        "grid_power": {
+          "name": "DLB Verkon teho"
+        },
+        "ev_power": {
+          "name": "DLB EV teho"
+        },
+        "house_power": {
+          "name": "DLB Asunnon teho"
+        },
+        "solar_power": {
+          "name": "DLB Aurinkopaneeli teho"
+        },
+        "max_current": {
+          "name": "Maksimi virta"
+        },
+        "total_kwh": {
+          "name": "Ladattu yhteensä"
+        },
+        "temperature": {
+          "name": "Lämpötila"
+        },
+        "maximum_session_consumption": {
+          "name": "Session latausraja"
+        },
+        "timer_start": {
+          "name": "Ajastuksen alku",
+          "state": {
+            "not_set": "ei asetettu"
+          }
+        },
+        "timer_end": {
+          "name": "Ajastuksen loppu",
+          "state": {
+            "not_set": "ei asetettu"
+          }
+        }
+      }
+    },
+    "config": {
+      "abort": {
+        "reconfigure_successful": "Uudelleenmääritys tehtiin onnistuneesti"
+      },
+      "step": {
+        "user": {
+          "title": "Lisää latausasema",
+          "description": "Beny Wifi integraation konfigurointi.",
+          "data": {
+            "ip_address": "IP-osoite (jos laite ei löydy sarjanumerolla)",
+            "port": "Portti",
+            "serial": "Sarjanumero",
+            "pin": "PIN-koodi",
+            "update_interval": "Päivitysväli"
+          }
+        }
+      },
+      "error": {
+        "device_already_configured": "Laite on jo lisätty.",
+        "cannot_communicate": "Laitteen kanssa kommunikointi epäonnistui. (Katso loki-tiedosto)",
+        "cannot_connect": "Laitteeseen ei voida yhdistää. Tarkasta IP-osoite ja portti. (Katso loki-tiedosto)",
+        "pin_not_numeric": "Pin-koodin tulee olla numeerinen",
+        "pin_length_invalid": "Pin-koodin tulee olla 6 merkkiä pitkä",
+        "serial_not_numeric": "Sarjanumeron tulee olla numeerinen",
+        "serial_length_invalid": "Sarjanumeron tulee olla 9 merkkiä pitkä",
+        "no_response_timeout": "Laite ei vastannut. Tarkasta sarjanumero ja pin-koodi",
+        "cannot_resolve_ip": "Laitteen IP-osoitetta ei voi selvittää automaattisesti. Voit yrittää asettaa sen manuaalisesti"
+      }
+    },
+    "options": {
+      "step": {
+        "init": {
+          "title": "Valinnat",
+          "description": "Päivitä Beny Wifi konfiguraatiota."
+        }
+      }
+    },
+    "services": {
+      "start_charging": {
+        "name": "Aloita lataus",
+        "description": "Aloittaa lataamisen",
+        "fields": {
+          "device_id": {
+            "name": "Latausasema",
+            "description": "Kohteena toimiva latausasema"
+          }
+        }
+      },
+      "stop_charging": {
+        "name": "Pysäytä lataaminen",
+        "description": "Pysäyttää lataamisen",
+        "fields": {
+          "device_id": {
+            "name": "Latausasema",
+            "description": "Kohteena toimiva latausasema"
+          }
+        }
+      },
+      "set_timer": {
+        "name": "Aseta ajastus",
+        "description": "Asettaa ajastimen",
+        "fields": {
+          "device_id": {
+            "name": "Latausasema",
+            "description": "Kohteena toimiva latausasema"
+          },
+          "start_time": {
+            "name": "Aloitusaika",
+            "description": "Aika, jolloin lataaminen aloitetaan"
+          },
+          "end_time": {
+            "name": "Lopetusaika",
+            "description": "Aika, jolloin lataaminen lopetetaan"
+          }
+        }
+      },
+      "set_weekly_schedule": {
+        "name": "Aseta viikkoajastin",
+        "description": "Asettaa päiväkohtaisen latausajastuksen",
+        "fields": {
+          "device_id": {
+            "name": "Latausasema",
+            "description": "Kohteena toimiva latausasema"
+          },
+          "sunday": {
+            "name": "Sunnuntai",
+            "description": "Asettaa sunnuntain ajastuksen"
+          },
+          "monday": {
+            "name": "Maanantai",
+            "description": "Asettaa maanantain ajastuksen"
+          },
+          "tuesday": {
+            "name": "Tiistai",
+            "description": "Asettaa tiistain ajastuksen"
+          },
+          "wednesday": {
+            "name": "Keskiviikko",
+            "description": "Asettaa keskiviikon ajastuksen"
+          },
+          "thursday": {
+            "name": "Torstai",
+            "description": "Asettaa torstain ajastuksen"
+          },
+          "friday": {
+            "name": "Perjantai",
+            "description": "Asettaa perjantain ajastuksen"
+          },
+          "saturday": {
+            "name": "Lauantai",
+            "description": "Asettaa lauantain ajastuksen"
+          },
+          "start_time": {
+            "name": "Aloitusaika",
+            "description": "Aika, jolloin lataaminen aloitetaan"
+          },
+          "end_time": {
+            "name": "Lopetusaika",
+            "description": "Aika, jolloin lataaminen lopetetaan"
+          }
+        }
+      },
+      "reset_timer": {
+        "name": "Nollaa ajastin",
+        "description": "Nollaa latausajastimen",
+        "fields": {
+          "device_id": {
+            "name": "Latausasema",
+            "description": "Kohteena toimiva latausasema"
+          }
+        }
+      },
+      "request_weekly_schedule": {
+        "name": "Pyydä viikkoajastukset",
+        "description": "Palauttaa laturin viikkoajastukset",
+        "fields": {
+          "device_id": {
+            "name": "Latausasema",
+            "description": "Kohteena toimiva latausasema"
+          }
+        }
+      },
+      "set_maximum_monthly_consumption": {
+        "name": "Aseta kuukausittainen latausraja",
+        "description": "Asettaa kuukausittaisen latausrajan",
+        "fields": {
+          "device_id": {
+            "name": "Latausasema",
+            "description": "Kohteena toimiva latausasema"
+          },
+          "maximum_consumption": {
+            "name": "Latausraja",
+            "description": "Latausraja kilowattitunteina"
+          }
+        }
+      },
+      "set_maximum_session_consumption": {
+        "name": "Aseta session latausraja",
+        "description": "Asettaa session latausrajan",
+        "fields": {
+          "device_id": {
+            "name": "Latausasema",
+            "description": "Kohteena toimiva latausasema"
+          },
+          "maximum_consumption": {
+            "name": "Latausraja",
+            "description": "Latausraja kilowattitunteina"
+          }
+        }
+      }
+    }
+  }
+  

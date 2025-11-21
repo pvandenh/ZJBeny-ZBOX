@@ -1,0 +1,248 @@
+{
+    "title": "Beny Wifi",
+    "entity": {
+      "sensor": {
+        "charger_state": {
+          "name": "Charger State",
+          "state": {
+            "abnormal": "abnormal",
+            "unplugged": "unplugged",
+            "standby": "standby",
+            "starting": "starting",
+            "unknown": "unknown",
+            "waiting": "waiting",
+            "charging": "charging"
+          }
+        },
+        "power": {
+          "name": "Power"
+        },
+        "voltage1": {
+          "name": "Voltage L1"
+        },
+        "voltage2": {
+          "name": "Voltage L2"
+        },
+        "voltage3": {
+          "name": "Voltage L3"
+        },
+        "current1": {
+          "name": "Current L1"
+        },
+        "current2": {
+          "name": "Current L2"
+        },
+        "current3": {
+          "name": "Current L3"
+        },
+        "grid_power": {
+          "name": "DLB Grid Power"
+        },
+        "ev_power": {
+          "name": "DLB EV Power"
+        },
+        "house_power": {
+          "name": "DLB House Power"
+        },
+        "solar_power": {
+          "name": "DLB Solar Power"
+        },
+        "max_current": {
+          "name": "Max Current"
+        },
+        "total_kwh": {
+          "name": "Total Energy"
+        },
+        "temperature": {
+          "name": "Temperature"
+        },
+        "maximum_session_consumption": {
+          "name": "Maximum Session Consumption"
+        },
+        "timer_start": {
+          "name": "Timer Start",
+          "state": {
+            "not_set": "Not set"
+          }
+        },
+        "timer_end": {
+          "name": "Timer End",
+          "state": {
+            "not_set": "Not set"
+          }
+        }
+      }
+    },
+    "config": {
+      "abort": {
+        "reconfigure_successful": "Reconfiguration was completed successfully"
+      },
+      "step": {
+        "user": {
+          "title": "Configure Beny Charger",
+          "description": "Set up Beny Wifi integration.",
+          "data": {
+            "ip_address": "IP Address (if not found by serial)",
+            "port": "Port",
+            "serial": "Serial number",
+            "pin": "PIN number",
+            "update_interval": "Update interval"
+          }
+        }
+      },
+      "error": {
+        "device_already_configured": "This device is already configured.",
+        "cannot_communicate": "Could not communicate with the device. See log for details.",
+        "cannot_connect": "Cannot connect to the device. See log for details",
+        "pin_not_numeric": "Pin code should be numeric",
+        "pin_length_invalid": "Pin code should be 6 characters long",
+        "serial_not_numeric": "Serial number should be numeric",
+        "serial_length_invalid": "Serial number should be 9 characters long",
+        "no_response_timeout": "No response from the device. Check serial and pin code",
+        "cannot_resolve_ip": "Device IP cannot be resolved by serial. You can try to set it manually"
+      }
+    },
+    "options": {
+      "step": {
+        "init": {
+          "title": "Options",
+          "description": "Update the options for your Beny Wifi charger."
+        }
+      }
+    },
+    "services": {
+      "start_charging": {
+        "name": "Start charging",
+        "description": "Starts the charging process",
+        "fields": {
+          "device_id": {
+            "name": "Charger",
+            "description": "Target charger"
+          }
+        }
+      },
+      "stop_charging": {
+        "name": "Stop charging",
+        "description": "Stops the charging process",
+        "fields": {
+          "device_id": {
+            "name": "Charger",
+            "description": "Target charger"
+          }
+        }
+      },
+      "set_timer": {
+        "name": "Set timer",
+        "description": "Sets charging timer",
+        "fields": {
+          "device_id": {
+            "name": "Charger",
+            "description": "Target charger"
+          },
+          "start_time": {
+            "name": "Start time",
+            "description": "Time to start charging"
+          },
+          "end_time": {
+            "name": "End time",
+            "description": "Time to end charging"
+          }
+        }
+      },
+      "set_weekly_schedule": {
+        "name": "Set Schedule",
+        "description": "Sets charging schedule",
+        "fields": {
+          "device_id": {
+            "name": "Charger",
+            "description": "Target charger"
+          },
+          "sunday": {
+            "name": "Sunday",
+            "description": "Toggle Sunday"
+          },
+          "monday": {
+            "name": "Monday",
+            "description": "Toggle Monday"
+          },
+          "tuesday": {
+            "name": "Tuesday",
+            "description": "Toggle Tuesday"
+          },
+          "wednesday": {
+            "name": "Wednesday",
+            "description": "Toggle Wednesday"
+          },
+          "thursday": {
+            "name": "Thursday",
+            "description": "Toggle Thursday"
+          },
+          "friday": {
+            "name": "Friday",
+            "description": "Toggle Friday"
+          },
+          "saturday": {
+            "name": "Saturday",
+            "description": "Toggle Saturday"
+          },
+          "start_time": {
+            "name": "Start time",
+            "description": "Time to start charging"
+          },
+          "end_time": {
+            "name": "End time",
+            "description": "Time to end charging"
+          }
+        }
+      },
+      "reset_timer": {
+        "name": "Reset timer",
+        "description": "Resets charging timer",
+        "fields": {
+          "device_id": {
+            "name": "Charger",
+            "description": "Target charger"
+          }
+        }
+      },
+      "request_weekly_schedule": {
+        "name": "Request weekly schedule",
+        "description": "Returns weekly schedule",
+        "fields": {
+          "device_id": {
+            "name": "Charger",
+            "description": "Target charger"
+          }
+        }
+      },
+      "set_maximum_monthly_consumption": {
+        "name": "Set maximum monthly consumption",
+        "description": "Sets limit to maximum monthly consumption",
+        "fields": {
+          "device_id": {
+            "name": "Charger",
+            "description": "Target charger"
+          },
+          "maximum_consumption": {
+            "name": "Maximum consumption",
+            "description": "Limit value for maximum monthly consumption"
+          }
+        }
+      },
+      "set_maximum_session_consumption": {
+        "name": "Set maximum session consumption",
+        "description": "Sets limit to maximum session consumption",
+        "fields": {
+          "device_id": {
+            "name": "Charger",
+            "description": "Target charger"
+          },
+          "maximum_consumption": {
+            "name": "Maximum consumption",
+            "description": "Limit value for maximum session consumption"
+          }
+        }
+      }
+    }
+  }
+  

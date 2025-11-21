@@ -1,0 +1,12 @@
+{
+    "services": {
+      "start_charging": {"service": "mdi:power-plug"},
+      "stop_charging": {"service": "mdi:power-plug-off"},
+      "set_maximum_monthly_consumption": {"service": "mdi:meter-electric"},
+      "set_maximum_session_consumption": {"service": "mdi:meter-electric"},
+      "set_timer": {"service": "mdi:timer-outline"},
+      "set_weekly_schedule": {"service": "mdi:calendar-clock"},
+      "request_weekly_schedule": {"service": "mdi:calendar-export"},
+      "reset_timer": {"service": "mdi:timer-off-outline"}
+    }
+  }

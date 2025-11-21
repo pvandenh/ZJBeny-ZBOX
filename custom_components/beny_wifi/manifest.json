@@ -1,0 +1,12 @@
+{
+  "domain": "beny_wifi",
+  "name": "Beny Wifi",
+  "codeowners": ["@Jarauvi"],
+  "config_flow": true,
+  "documentation": "https://github.com/Jarauvi/beny_wifi/tree/main",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/Jarauvi/beny_wifi/issues",
+  "loggers": ["custom_components.beny_wifi"],
+  "requirements": [],
+  "version": "0.8.2"
+}

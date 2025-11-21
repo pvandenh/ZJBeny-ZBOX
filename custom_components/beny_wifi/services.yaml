@@ -1,0 +1,162 @@
+start_charging:
+  name: "Start Charging"
+  description: "Start charging."
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: beny_wifi
+
+stop_charging:
+  name: "Stop Charging"
+  description: "Stop charging."
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: beny_wifi
+
+set_timer:
+  name: "Set Timer"
+  description: "Sets charging timer."
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: beny_wifi
+    start_time:
+      required: true
+      selector: 
+        time: {}
+    end_time:
+      required: false
+      selector: 
+        time: {}
+
+reset_timer:
+  name: "Reset Timer"
+  description: "Resets charging timer."
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: beny_wifi
+
+set_weekly_schedule:
+  name: "Set Weekly Schedule"
+  description: "Sets weekly schedule."
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: beny_wifi
+    sunday:
+      required: true
+      selector: 
+        boolean: {}
+    monday:
+      required: true
+      selector: 
+        boolean: {}
+    tuesday:
+      required: true
+      selector: 
+        boolean: {}
+    wednesday:
+      required: true
+      selector: 
+        boolean: {}
+    thursday:
+      required: true
+      selector: 
+        boolean: {}
+    friday:
+      required: true
+      selector: 
+        boolean: {}
+    saturday:
+      required: true
+      selector: 
+        boolean: {}
+    start_time:
+      required: true
+      selector: 
+        time: {}
+    end_time:
+      required: true
+      selector: 
+        time: {}
+
+request_weekly_schedule:
+  name: "Request Weekly Schedule"
+  description: "Returns weekly schedule if set."
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: beny_wifi
+
+set_maximum_monthly_consumption:
+  name: "Set Maximum Monthly Consumption"
+  description: "Limits maximum energy consumption on a monthly basis."
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: beny_wifi
+    maximum_consumption:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 65535
+          step: 1
+          unit_of_measurement: "kWh"
+          mode: box
+
+set_maximum_session_consumption:
+  name: "Set Maximum Session Consumption"
+  description: "Limits maximum energy consumption on a session basis."
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: beny_wifi
+    maximum_consumption:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 256
+          step: 1
+          unit_of_measurement: "kWh"
+          mode: box
+
+# ADDED FROM v0.8.1
+set_max_current:
+  name: "Set Max Current"
+  description: "Set the maximum charging current in amps."
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: beny_wifi
+    max_current:
+      name: "Max Current"
+      description: "Current limit between 6A and 32A."
+      required: true
+      example: 16
+      selector:
+        number:
+          min: 6
+          max: 32
+          mode: slider
