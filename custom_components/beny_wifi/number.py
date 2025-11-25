@@ -27,12 +27,14 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         )
     ]
 
-    async_add_entities(numbers)
+    async_add_entities(numbers, update_before_add=True)
     _LOGGER.info(f"Added max_current_control number entity for device {device_id}")
 
 
 class BenyWifiMaxCurrentNumber(CoordinatorEntity, NumberEntity):
     """Max Current control number entity."""
+
+    _attr_available = True
 
     def __init__(self, coordinator, key, device_id=None, device_model=None):
         """Initialize the number entity."""
@@ -54,11 +56,19 @@ class BenyWifiMaxCurrentNumber(CoordinatorEntity, NumberEntity):
         
         # Store the local value separately from coordinator data
         self._local_value = None
+        
+        # Set entity_id explicitly
+        self.entity_id = f"number.{device_id}_max_current_control"
 
     @property
     def unique_id(self):
         """Return a unique ID for this number entity."""
         return f"{self._device_id}_{self.key}"
+
+    @property
+    def available(self) -> bool:
+        """Return if entity is available."""
+        return True
 
     @property
     def native_value(self):
@@ -84,6 +94,11 @@ class BenyWifiMaxCurrentNumber(CoordinatorEntity, NumberEntity):
         self._local_value = int(value)
         self.async_write_ha_state()
         _LOGGER.info(f"Max current control for {self._device_id} set to {int(value)}A (stored locally, press Send button to apply)")
+
+    @property
+    def should_poll(self) -> bool:
+        """No need to poll, coordinator handles updates."""
+        return False
 
     @property
     def device_info(self) -> DeviceInfo:
