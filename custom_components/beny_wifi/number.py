@@ -52,8 +52,8 @@ class BenyWifiMaxCurrentNumber(CoordinatorEntity, NumberEntity):
         self._attr_mode = NumberMode.SLIDER
         self._attr_icon = "mdi:current-ac"
         
-        # Initialize with current max_current value from coordinator
-        self._attr_native_value = 16  # Default fallback
+        # Store the local value separately from coordinator data
+        self._local_value = None
 
     @property
     def unique_id(self):
@@ -62,8 +62,12 @@ class BenyWifiMaxCurrentNumber(CoordinatorEntity, NumberEntity):
 
     @property
     def native_value(self):
-        """Return the current value from coordinator if available."""
-        # Try to get the actual max_current from the coordinator data
+        """Return the current value - prefer local value, fall back to coordinator."""
+        # If we have a local value set by the user, return that
+        if self._local_value is not None:
+            return float(self._local_value)
+        
+        # Otherwise try to get from coordinator data
         if self.coordinator.data:
             max_current = self.coordinator.data.get("max_current")
             if max_current is not None:
@@ -71,13 +75,15 @@ class BenyWifiMaxCurrentNumber(CoordinatorEntity, NumberEntity):
                     return float(max_current)
                 except (ValueError, TypeError):
                     _LOGGER.warning(f"Invalid max_current value from coordinator: {max_current}")
-        return self._attr_native_value
+        
+        # Final fallback
+        return 16.0
 
     async def async_set_native_value(self, value: float) -> None:
         """Update the current value - this stores it locally but doesn't send to device."""
-        self._attr_native_value = int(value)
+        self._local_value = int(value)
         self.async_write_ha_state()
-        _LOGGER.debug(f"Max current slider set to {int(value)}A (not sent to device yet)")
+        _LOGGER.info(f"Max current control for {self._device_id} set to {int(value)}A (stored locally, press Send button to apply)")
 
     @property
     def device_info(self) -> DeviceInfo:

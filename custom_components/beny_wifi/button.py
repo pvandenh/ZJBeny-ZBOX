@@ -49,13 +49,40 @@ class BenyWifiSendMaxCurrentButton(ButtonEntity):
 
     async def async_press(self) -> None:
         """Handle the button press - send current max_current value to device."""
-        # Get the current value from the number entity
-        number_entity_id = f"number.{self._device_id}_max_current_control"
-        number_state = self.hass.states.get(number_entity_id)
+        # Try multiple entity_id formats to find the number entity
+        possible_entity_ids = [
+            f"number.{self._device_id}_max_current_control",
+            f"number.beny_charger_{self._device_id}_max_current_control",
+        ]
+        
+        number_state = None
+        used_entity_id = None
+        
+        # Try to find the number entity
+        for entity_id in possible_entity_ids:
+            number_state = self.hass.states.get(entity_id)
+            if number_state is not None:
+                used_entity_id = entity_id
+                _LOGGER.debug(f"Found number entity: {entity_id}")
+                break
+        
+        # If not found by entity_id, search through all number entities
+        if number_state is None:
+            _LOGGER.warning(
+                f"Could not find number entity by standard IDs. Searching all number entities..."
+            )
+            for state in self.hass.states.async_all("number"):
+                if "max_current_control" in state.entity_id and self._device_id in state.entity_id:
+                    number_state = state
+                    used_entity_id = state.entity_id
+                    _LOGGER.info(f"Found number entity by search: {state.entity_id}")
+                    break
         
         if number_state is None:
             _LOGGER.error(
-                f"Could not find number entity {number_entity_id} to read max current value"
+                f"Could not find number entity for device {self._device_id}. "
+                f"Tried: {', '.join(possible_entity_ids)}. "
+                f"Available number entities: {[s.entity_id for s in self.hass.states.async_all('number')]}"
             )
             return
         
@@ -74,12 +101,14 @@ class BenyWifiSendMaxCurrentButton(ButtonEntity):
             await self.coordinator.async_set_max_current(device_name, max_current)
             
             _LOGGER.info(
-                f"Successfully sent max current {max_current}A to {device_name}"
+                f"Successfully sent max current {max_current}A to {device_name} "
+                f"(read from {used_entity_id})"
             )
             
         except (ValueError, TypeError) as e:
             _LOGGER.error(
-                f"Error converting max current value: {number_state.state}, error: {e}"
+                f"Error converting max current value from {used_entity_id}: "
+                f"state={number_state.state}, error: {e}"
             )
 
     @property
