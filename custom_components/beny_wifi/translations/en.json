@@ -71,6 +71,16 @@
             "not_set": "Not set"
           }
         }
+      },
+      "number": {
+        "max_current_control": {
+          "name": "Max Current Control"
+        }
+      },
+      "button": {
+        "send_max_current": {
+          "name": "Send Max Current"
+        }
       }
     },
     "config": {
@@ -245,4 +255,3 @@
       }
     }
   }
-  

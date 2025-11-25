@@ -71,6 +71,16 @@
             "not_set": "ei asetettu"
           }
         }
+      },
+      "number": {
+        "max_current_control": {
+          "name": "Maksimi virran säätö"
+        }
+      },
+      "button": {
+        "send_max_current": {
+          "name": "Lähetä maksimi virta"
+        }
       }
     },
     "config": {
@@ -245,4 +255,3 @@
       }
     }
   }
-  

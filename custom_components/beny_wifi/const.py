@@ -5,7 +5,8 @@ from typing import Final
 
 from homeassistant.const import Platform
 
-PLATFORMS: Final = [Platform.SENSOR]
+# Updated to include NUMBER and BUTTON platforms
+PLATFORMS: Final = [Platform.SENSOR, Platform.NUMBER, Platform.BUTTON]
 
 NAME: Final = "Beny Wifi"
 DOMAIN: Final = "beny_wifi"
