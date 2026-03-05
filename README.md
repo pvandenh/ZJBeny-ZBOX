@@ -1,3 +1,10 @@
+-----
+NOTE: for future enhancements, the original dev has now picked up the project again, see - https://github.com/Jarauvi/beny_wifi
+-----
+
+
+
+
 
 Building on the fine work of Jarauvi and michaeldeane62
 
